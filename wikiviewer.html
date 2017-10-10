@@ -1,0 +1,35 @@
+
+<html>
+<head>
+  <title>Wikipedia viewer</title>
+</head>
+<body>
+
+<div id="wiki-viewer">
+  <input v-model="subject"
+  placeholder="Please search for a subject">
+
+<button v-on:click="searchWiki(subject)">Search wiki</button>
+  
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+
+<script>
+
+  new Vue({
+    el: '#wiki-viewer',
+      data: {
+	searchWiki: function (subject) {
+	  alert(subject)   
+       }
+     }
+   })
+
+     
+
+</script>
+
+</body>
+</html>
+
