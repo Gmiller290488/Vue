@@ -2,22 +2,26 @@
    <head></head>
       <body>
 	<div id="app-5">
-	  <p>{{ message }} </p>
+	  <p>Original message: "{{ message }}" </p>
+
 	  <input v-model="message">
-          <button v-on:click="reverseMessage">Reverse Message</button>
-	</div>
+		
+	  <p>Computed reversed message: "{{ reversedMessage }}" </p>
+</div>
 
 <script src="https://unpkg.com/vue"></script>
 
 <script>
-var app5 = new Vue({
+var vm = new Vue({
   el: '#app-5',
   data: {
-    message: 'Hello world'
+    message: '' 
     },
-  methods: {
-    reverseMessage: function () {
-      this.message = this.message.split('').reverse().join('')
+  computed: {
+    // a computer getter
+    reversedMessage: function () {
+      // This points to the vm instance
+      return this.message.split('').reverse().join('')
    }
 }
 })
