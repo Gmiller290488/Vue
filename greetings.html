@@ -1,0 +1,31 @@
+
+<html>
+<head></head>
+<body>
+
+
+<div id="greetings">
+  <input v-model="name"
+  placeholder="Enter your name">
+  
+  <button v-on:click="say('hello' + ' ' + name)">Say Hello</button>
+  <button v-on:click="say('how are you?' + ' ' + name)"> Say How are you?</button>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+
+<script>
+
+  new Vue({
+   el: '#greetings',
+   data: {
+        say: function (message) {
+          alert(message + ' ' + name)
+     }
+   }
+  })
+
+</script>
+
+</body>
+</html>
