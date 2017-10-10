@@ -6,20 +6,35 @@
   <p> {{ message}} </p>
 </div>
 
+<div id="app-3">
+  <span v-if="seen" > Now you see me </span>
+</div>
+
+
+
 <script src="https://unpkg.com/vue"></script>
 
 <script>
 
-  new Vue({
+  var app = new Vue({
     el: '#app',
       data: {
         message: 'Hello World in vue.js!'
      }
   });
+
+  var app3 = new Vue({
+    el: '#app3',
+    data: {
+      seen: false
+   }
+})
+
+
 </script>
 
 </body>
-</hmtl>
+</html>
 
 
 
