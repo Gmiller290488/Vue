@@ -2,29 +2,61 @@
 <html>
 <head></head>
 <body>
-
-<div id="app-4">
-  <ol>
-    <li v-for = "todo in todos">
- 	{{ todo.text }}
-    </li>
-  </ol>
+<div id="todo-list">
+  <input
+    v-model="newTodoText"
+    v-on:keyup.enter="addNewTodo"
+    placeholder="Add a todo"
+  >
+  <ul>
+    <li
+      is="todo-item"
+      v-for="(todo, index) in todos"
+      v-bind:key="todo.id"
+      v-bind:title="todo.title"
+      v-on:remove="todos.splice(index, 1)"
+     ></li>
+  </ul>
 </div>
+
 
 <script src="https://unpkg.com/vue"></script>
 
 <script>
 
-  var app4 = new Vue({
-    el: '#app-4',
+  Vue.component('todo-item', {
+    template: '\
+      <li>\
+        {{ title }}\
+        <button v-on:click="$emit(\'remove\')">X</button>\
+     </li>\
+   ',
+   props: ['title']
+})
+
+
+    new Vue({
+    el: '#todo-list',
       data: {
-        todos: [
-	  { text: 'Learn Vue' },
- 	  { text: 'Learn Vim' },
-	  { text: 'Dont get sacked' }
-	]
+      newTodoText: '',
+      todos: [
+	  { id: 1, title: 'Learn Vue',  },
+ 	  { id: 2, title: 'Learn Vim',  },
+	  { id: 3, title: 'Dont get sacked', }
+	],
+	nextTodoId: 4
+     },
+     methods: {
+       addNewTodo: function () {
+         this.todos.push({
+           id: this.nextTodoId++,
+           title: this.newTodoText
+       })
+       this.newTodoText = ''
      }
-  })
+   }
+
+})
 </script>
 
 </body>
