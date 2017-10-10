@@ -3,8 +3,18 @@
 <body>
 
 <div id="app">
-  <p> {{ message}} </p>
+  <p> {{ message }} </p>
 </div>
+
+<p>
+
+<div id="app-2">
+  <span v-bind:title="roll-overmessage">
+    Hover your mouse above me fora few seconds to see tje dynamically bound title!
+  </span>
+</div>
+
+<p>
 
 <div id="app-3">
   <span v-if="seen" > Now you see me </span>
@@ -23,12 +33,8 @@
      }
   });
 
-  var app3 = new Vue({
-    el: '#app3',
-    data: {
-      seen: false
-   }
-})
+
+     
 
 
 </script>
