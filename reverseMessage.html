@@ -2,12 +2,23 @@
    <head></head>
       <body>
 	<div id="app-5">
-	  <p>Original message: "{{ message }}" </p>
+	  <p>Original message: {{ message }} </p>
 
 	  <input v-model="message">
 		
-	  <p>Computed reversed message: "{{ reversedMessage }}" </p>
-</div>
+	  <p v-if= "message.length == 0">
+		Computed reversed message: "{{ reversedMessage }}" </p>
+	  <p v-else-if= "message == reversedMessage">
+	 	{{ message }} is a palindrome!</p>
+          <p v-else>
+		{{ message }} is not a palindrome</p>
+	  
+
+ </p>
+	 
+
+       </div>
+
 
 <script src="https://unpkg.com/vue"></script>
 
