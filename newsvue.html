@@ -16,11 +16,11 @@
   <select v-model="selected"
   v-on:click="makeNewSearch">
     <option v-for="option in options" v-bind:value="option.text">
-     {{ option.text }}
+     {{ option.text }} 
     </option>
   </select>
 
-
+  <button v-on:click="makeNewSearch">Search</button>
 <div v-for="result in results">
   <div class="card">
     <div class="card-divider">
@@ -64,18 +64,19 @@ const vm = new Vue({
   },
   mounted() {
    <!-- this.makeNewSearch(this.newSearchText); --!>
-     }, 
-     methods: {
+     },
+   methods: {
        makeNewSearch() {
+         if (this.newSearchText != '') {
+           let url = buildUrl(this.newSearchText + "?sort=" + this.selected);
+           axios.get(url).then((response) => {
          
-         let url = buildUrl(this.newSearchText + "?sort=" + this.selected);
-         axios.get(url).then((response) => {
-         
-          this.results = response.data.response.docs;
-         }).catch( error => {console.log(error); });
-    }
+           this.results = response.data.response.docs;
+           }).catch( error => {console.log(error); });
+     }
   }
-});
+ }
+}); 
 </script>
 
 </body>
