@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The greatest news app ever</title>
+  </head>
+  <body>
+<div id = "app">
+<div v-for="result in results">
+  <div class="card">
+    <div class="card-divider">
+     <p><a href = "{{ result.url }}"> {{ result.title }}</a></p>
+    </div>
+    <div class="card-section">
+      <p>{{ result.abstract }}</p>
+	<br>
+	<hr>
+    </div>
+  </div>
+</div>
+</div>
+ 
+
+ <script src="https://unpkg.com/vue"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ <script>
+   
+const vm = new Vue({
+  el: '#app',
+  data: {
+    results: []
+  },
+  mounted() {
+    axios.get("https://api.nytimes.com/svc/topstories/v2/home.json?api-key=c74fb5d7de7f4394a37aa1f462430bff")
+   .then(response => {this.results = response.data.results})
+  }
+});
+</script>
+  </body>
+</html>

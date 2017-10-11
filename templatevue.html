@@ -2,8 +2,8 @@
 <head></head>
 <body>
 
-<div id="app">
-  <p> {{ message }} </p>
+<div id="app" v-for="message in messages">
+ 
 </div>
 
 <script src="https://unpkg.com/vue"></script>
@@ -13,7 +13,9 @@
   new Vue({
     el: '#app',
       data: {
-        message: 'template'
+        messages: [
+		{'template'},
+		{'list template'} ]
      }
   });
 </script>
