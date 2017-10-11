@@ -13,10 +13,11 @@
    v-on:keyup.enter="makeNewSearch"
    placeholder="Enter search term here">
 
-  <select v-model="selected">
-    <option disabled value="">Please select one</option>
-    <option>Newest</option>
-    <option>Oldest</option>
+  <select v-model="selected"
+  v-on:click="makeNewSearch">
+    <option v-for="option in options" v-bind:value="option.text">
+     {{ option.text }}
+    </option>
   </select>
 
 
@@ -54,17 +55,22 @@ function buildUrl(url) {
 const vm = new Vue({
   el: '#app',
   data: {
+    selected: '',
+    options: [
+        { text: 'Newest'},
+        { text: 'Oldest'}  ],
     newSearchText: '',  
     results: []
   },
   mounted() {
-    this.makeNewSearch(this.newSearchText);
-     },
+   <!-- this.makeNewSearch(this.newSearchText); --!>
+     }, 
      methods: {
        makeNewSearch() {
-         let url = buildUrl(this.newSearchText);
+         
+         let url = buildUrl(this.newSearchText + "?sort=" + this.selected);
          axios.get(url).then((response) => {
-         <!--  this.results = response.data.results; !-->
+         
           this.results = response.data.response.docs;
          }).catch( error => {console.log(error); });
     }
