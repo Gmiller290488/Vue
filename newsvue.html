@@ -1,23 +1,7 @@
 <html lang="en">
   <head>
-    <style type="text/css">
-     .card-section {
-	font-color:#c9c9c9;
-        padding-left: 20px;
-        }	
-     a {
-	font-size:150%;
-	color: blue;        
-        }
-     #app {
-	text-align:center
- 	}  
-     input {
-	text-align:center
-	}
-
-   </style>
-    <meta charset="utf-8">
+    <link rel="stylesheet" href="newsvue.css" title="external style sheet">    
+<meta charset="utf-8">
     <title>The greatest news app ever</title>
   </head>
   <body>
@@ -41,16 +25,21 @@
   <p>
 
   <button v-on:click="makeNewSearch" v-if="newSearchText != ''">Search</button>
+
+
 <div v-for="result in results">
   <div class="card">
     <div class="card-divider">
-     <p><a :href="result.web_url"> {{ result.headline.main }}</a></p>
+	<p>
+         <a :href="result.web_url">
+          {{ result.headline.main }}</a>
+        </p>
     </div>
     <div class="card-section">
-      <p>{{ result.snippet }}</p>
-      </div>
-      
-      <hr>
+       <p>{{ result.snippet }}</p>
+   </div>
+   <hr>
+	
 </div>
 </div>
 
@@ -58,46 +47,10 @@
 
  <script src="https://unpkg.com/vue"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script>
+ <script type="text/javascript" src="newsvue.js"></script>
 
 
-const baseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key";
-const ApiKey = "=c74fb5d7de7f4394a37aa1f462430bff";
-
-function buildUrl(url) {
-  
-  console.log( baseUrl + ApiKey + "&q=" + url)
-  
-  return baseUrl + ApiKey + "&q=" + url
-}
-
-  
-const vm = new Vue({
-  el: '#app',
-  data: {
-    selected: '',
-    options: [
-        { text: 'Newest'},
-        { text: 'Oldest'}  ],
-    newSearchText: '',  
-    results: []
-  },
-  mounted() {
-   <!-- this.makeNewSearch(this.newSearchText); --!>
-     },
-   methods: {
-       makeNewSearch() {
-         if (this.newSearchText != '') {
-           let url = buildUrl(this.newSearchText + "?sort=" + this.selected);
-           axios.get(url).then((response) => {
-         
-           this.results = response.data.response.docs;
-           }).catch( error => {console.log(error); });
-     }
-  }
- }
-}); 
-</script>
 
 </body>
 </html>
+
