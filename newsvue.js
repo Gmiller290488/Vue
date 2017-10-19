@@ -9,12 +9,12 @@ function buildUrl(url) {
   return baseUrl + ApiKey + "&q=" + url
 }
 
-
+ 
   
 const vm = new Vue({
   el: '#app',
   data: {
-    selected: '',
+    selected: 'Newest',
     options: [
         { text: 'Newest'},
         { text: 'Oldest'}  ],
@@ -22,7 +22,6 @@ const vm = new Vue({
     results: []
   },
   mounted() {
-   <!-- this.makeNewSearch(this.newSearchText); --!>
      },
    methods: {
        makeNewSearch() {
@@ -30,7 +29,9 @@ const vm = new Vue({
            let url = buildUrl(this.newSearchText + "?sort=" + this.selected);
            axios.get(url).then((response) => {
          
-           this.results = response.data.response.docs;
+	  	
+        <!--  this.results = response.data.response.docs; -->
+          this.results = response.data;
            }).catch( error => {console.log(error); });
      }
   }
